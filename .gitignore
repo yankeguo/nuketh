@@ -12,4 +12,5 @@ _deps
 
 *.bal
 
+/build
 /nuketh-balsort
