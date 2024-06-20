@@ -108,6 +108,12 @@ go run tools/nuketh-csv-to-bal/main.go --from dir/to/gzip/csv/ --to nuketh.bal
 ./nuketh-balsort
 ```
 
+### 3. Nuke it
+
+```shell
+./nuketh
+```
+
 ## Credits
 
 GUO YANKE, MIT License
