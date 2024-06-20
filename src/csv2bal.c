@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <fcntl.h>
 #include <string.h>
-#include <sys/errno.h>
+#include <errno.h>
 
 #include "util.h"
 #include "bal.h"
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
         return 1;
     };
 
-    char filename[MAXNAMLEN];
+    char filename[1024];
 
     for (;;)
     {
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
             break;
         }
 
-        if (entry->d_namlen == 0)
+        if (strlen(entry->d_name) == 0)
         {
             continue;
         }
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 
         strcat(filename, dir_s);
         strcat(filename, "/");
-        strncat(filename, entry->d_name, entry->d_namlen);
+        strcat(filename, entry->d_name);
 
         printf("Processing %s\n", filename);
 

@@ -5,5 +5,6 @@ CMakeFiles
 Makefile
 /nuketh
 /nuketh-*
-*.bal
+/csv
+/*.bal
 /result.txt

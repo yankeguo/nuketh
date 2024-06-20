@@ -15,5 +15,5 @@ _deps
 /nuketh
 
 /csv
-*.bal
+/*.bal
 /result.txt
