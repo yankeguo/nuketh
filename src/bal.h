@@ -1,5 +1,5 @@
-#ifndef __BAL_H__
-#define __BAL_H__
+#ifndef __NUKETH_BAL_H__
+#define __NUKETH_BAL_H__
 
 #include <sys/stat.h>
 #include <stdlib.h>

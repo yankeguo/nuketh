@@ -48,11 +48,9 @@ int main(int argc, char *argv[])
 
     for (;;)
     {
-        fill_random(private_key, PRIVATE_KEY_SIZE);
-
-        if (!uECC_compute_public_key(private_key, public_key, curve))
+        if (!uECC_make_key(public_key, private_key, curve))
         {
-            printf("Failed to compute public key\n");
+            printf("Failed to make key\n");
             return -1;
         }
 
