@@ -20,6 +20,15 @@ void handle_signal(int signal)
 
 int main(int argc, char *argv[])
 {
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s <nuketh.bal> <result.txt>\n", argv[0]);
+        return 1;
+    }
+
+    char *bal_s = argv[1];
+    char *ret_s = argv[2];
+
     signal(SIGINT, handle_signal);
     signal(SIGTERM, handle_signal);
 
@@ -28,13 +37,13 @@ int main(int argc, char *argv[])
 
     FILE *f_out;
 
-    if ((f_out = fopen("result.txt", "a")) == NULL)
+    if ((f_out = fopen(ret_s, "a")) == NULL)
     {
         perror("fopen");
         return -1;
     }
 
-    if (bal_table_open(&t, "nuketh.bal") != 0)
+    if (bal_table_open(&t, bal_s) != 0)
     {
         return -1;
     }

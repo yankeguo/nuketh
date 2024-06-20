@@ -101,7 +101,7 @@ Every Ethereum address is 20-bytes width, we just list all addresses in binary f
 ### 3. Nuke it
 
 ```shell
-./nuketh
+./nuketh nuketh.bal result.txt
 ```
 
 ## Credits
