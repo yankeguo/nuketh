@@ -2,6 +2,7 @@
 #define __NUKETH_BAL_H__
 
 #include <sys/stat.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 typedef struct

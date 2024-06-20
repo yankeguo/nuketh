@@ -1,0 +1,9 @@
+/build
+*.o
+CMakeCache.txt
+CMakeFiles
+Makefile
+/nuketh
+/nuketh-*
+*.bal
+/result.txt
