@@ -4,4 +4,8 @@ project(nuketh)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(nuketh-balsort src/bal.c src/balsort.c)
+# nuketh-balsort
+add_executable(nuketh-balsort src/bal.c src/main-balsort.c)
+
+# nuketh
+add_executable(nuketh src/main.c src/uECC/uECC.c)
