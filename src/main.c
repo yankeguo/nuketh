@@ -26,6 +26,14 @@ int main(int argc, char *argv[])
     bal_table t;
     bal_table_init(&t);
 
+    FILE *f_out;
+
+    if ((f_out = fopen("result.txt", "a")) == NULL)
+    {
+        perror("fopen");
+        return -1;
+    }
+
     if (bal_table_open(&t, "nuketh.bal") != 0)
     {
         return -1;
@@ -58,7 +66,13 @@ int main(int argc, char *argv[])
         {
             printf("Collision found\n");
             print_hex(private_key, PRIVATE_KEY_SIZE);
-            bal_entry_print(address);
+            print_hex(address, sizeof(bal_entry));
+
+            fprintf(f_out, "Private key: ");
+            fprint_hex(f_out, private_key, PRIVATE_KEY_SIZE);
+            fprintf(f_out, "Address: ");
+            fprint_hex(f_out, address, sizeof(bal_entry));
+            fflush(f_out);
             break;
         }
 
@@ -69,6 +83,8 @@ int main(int argc, char *argv[])
     }
 
     bal_table_close(&t);
+
+    fclose(f_out);
 
     return 0;
 }

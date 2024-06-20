@@ -15,3 +15,5 @@ _deps
 /build
 /nuketh-balsort
 /nuketh
+
+/result.txt
