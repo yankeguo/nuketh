@@ -99,12 +99,14 @@ Every Ethereum address is 20-bytes width, we just list all addresses in binary f
 TODO: Migrate original works from Golang
 
 ```shell
-go run tools/nuketh-csv-to-bal/main.go --from path/to/csv/ --to nuketh.bal
+go run tools/nuketh-csv-to-bal/main.go --from dir/to/gzip/csv/ --to nuketh.bal
 ```
 
 #### 2.2 Generate a Sorted Binary Addresses List
 
-TODO:
+```shell
+./nuketh-balsort
+```
 
 ## Credits
 
