@@ -4,7 +4,8 @@
 
 int main(int argc, char **argv)
 {
-    bal_table t = bal_table_new();
+    bal_table t;
+    bal_table_init(&t);
 
     if (bal_table_open(&t, "nuketh.bal") < 0)
     {

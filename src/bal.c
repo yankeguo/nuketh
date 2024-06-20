@@ -52,13 +52,11 @@ int bal_entry_cmp(const bal_entry *a, const bal_entry *b)
     }
 }
 
-bal_table bal_table_new()
+void bal_table_init(bal_table *t)
 {
-    bal_table t;
-    t.fd = -1;
-    t.size = 0;
-    t.buf = NULL;
-    return t;
+    t->fd = -1;
+    t->size = 0;
+    t->buf = NULL;
 }
 
 int bal_table_open(bal_table *t, const char *path)

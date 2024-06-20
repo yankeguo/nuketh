@@ -23,7 +23,7 @@ typedef struct
     bal_entry *buf;
 } bal_table;
 
-bal_table bal_table_new();
+void bal_table_init(bal_table *t);
 
 int bal_table_open(bal_table *t, const char *path);
 
