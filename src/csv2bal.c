@@ -11,16 +11,16 @@
 
 const char *CSV_HEADER_PREFIX = "address,";
 
-bool handle_csv(char *filename, FILE *out)
+int handle_csv(char *filename, FILE *out)
 {
     FILE *in = NULL;
     if ((in = fopen(filename, "r")) == NULL)
     {
         perror("Error: Cannot open input file");
-        return false;
+        return 0;
     }
 
-    bool ret = false;
+    int ret = 1;
 
     char line[1024];
 
@@ -73,7 +73,7 @@ bool handle_csv(char *filename, FILE *out)
         goto handle_csv_close;
     }
 
-    ret = true;
+    ret = 0;
 
 handle_csv_close:
     fclose(in);
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 
         printf("Processing %s\n", filename);
 
-        if (!handle_csv(filename, out))
+        if (handle_csv(filename, out) != 0)
         {
             return 1;
         }
@@ -167,9 +167,26 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    int sample_base = t.size / 3;
+    int sample_count = 5;
+
+    printf("Sample:\n");
+
+    for (int i = 0; i < sample_count; i++)
+    {
+        bal_entry_print(&t.buf[sample_base + i]);
+    }
+
     printf("Sorting...\n");
 
     bal_table_sort(&t);
+
+    printf("Sample after sorting:\n");
+
+    for (int i = 0; i < sample_count; i++)
+    {
+        bal_entry_print(&t.buf[sample_base + i]);
+    }
 
     bal_table_close(&t);
 
