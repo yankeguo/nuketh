@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "nuketh"
-    ]
+    ],
+    "files.associations": {
+        "*.inc": "c"
+    }
 }

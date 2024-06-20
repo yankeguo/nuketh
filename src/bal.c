@@ -1,17 +1,14 @@
 #include <stdio.h>
 #include <sys/mman.h>
 #include <fcntl.h>
-#include "bal.h"
 #include <unistd.h>
+
+#include "bal.h"
+#include "util.h"
 
 void bal_entry_print(const bal_entry *e)
 {
-    uint8_t *raw = (uint8_t *)e;
-    for (int i = 0; i < sizeof(bal_entry); i++)
-    {
-        printf("%02x", raw[i]);
-    }
-    printf("\n");
+    print_hex(e, sizeof(bal_entry));
 }
 
 int bal_entry_cmp(const bal_entry *a, const bal_entry *b)
@@ -124,4 +121,24 @@ void bal_table_close(bal_table *t)
     t->size = 0;
 
     close(t->fd);
+}
+
+off_t bal_table_search(const bal_table *t, const bal_entry *entry)
+{
+    if (t->buf == NULL)
+    {
+        fprintf(stderr, "Table not open\n");
+        return -1;
+    }
+
+    bal_entry *ret = bsearch(entry, t->buf, t->size, sizeof(bal_entry), (int (*)(const void *, const void *))bal_entry_cmp);
+
+    if (ret == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return ret - t->buf;
+    }
 }
