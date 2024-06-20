@@ -10,10 +10,10 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-*.bal
-
 /build
-/nuketh-balsort
+/nuketh-csv2bal
 /nuketh
 
+/csv
+*.bal
 /result.txt

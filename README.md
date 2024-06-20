@@ -94,18 +94,8 @@ Export table to CSV files to Google Storage and download them, remember to add a
 
 Every Ethereum address is 20-bytes width, we just list all addresses in binary format, and this will be our Binary Addresses List (BAL) file.
 
-#### 2.1 Generate a Unsorted Binary Addresses List 
-
-TODO: Migrate original works from Golang
-
 ```shell
-go run tools/nuketh-csv-to-bal/main.go --from dir/to/gzip/csv/ --to nuketh.bal
-```
-
-#### 2.2 Generate a Sorted Binary Addresses List
-
-```shell
-./nuketh-balsort
+./nuketh-csv2bal dir/to/csv nuketh.bal
 ```
 
 ### 3. Nuke it
