@@ -1,0 +1,11 @@
+services:
+  nuketh:
+    image: nuketh
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: no
+    volumes:
+      - ./:/data
+    deploy:
+      replicas: 3
