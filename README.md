@@ -1,6 +1,6 @@
 # nuketh
 
-A simple Ethereum collision tool
+A dead-simple Ethereum collision tool
 
 ## Usage
 
