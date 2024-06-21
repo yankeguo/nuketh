@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <signal.h>
+#include <stdatomic.h>
+#include <pthread.h>
+#include <unistd.h>
 
 #include "keccak256/keccak256.h"
 #include "uECC/uECC.h"
@@ -9,13 +12,25 @@
 
 #define PRIVATE_KEY_SIZE 32
 #define PUBLIC_KEY_SIZE 64
+#define COUNTER_INTERVAL 5
 
-int signal_caught = 0;
+atomic_long *_counter = NULL;
+
+int _signal_caught = 0;
 
 void handle_signal(int signal)
 {
     printf("Caught signal %d\n", signal);
-    signal_caught = 1;
+    _signal_caught = 1;
+}
+
+void routine_print_counter()
+{
+    while (!_signal_caught)
+    {
+        sleep(COUNTER_INTERVAL);
+        printf("Working: %ld/s\n", atomic_exchange(_counter, 0) / COUNTER_INTERVAL);
+    }
 }
 
 int main(int argc, char *argv[])
@@ -48,12 +63,24 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    printf("Table opened\n");
+
     uECC_Curve curve = uECC_secp256k1();
     uint8_t private_key[PRIVATE_KEY_SIZE];
     uint8_t public_key[PUBLIC_KEY_SIZE];
     SHA3_CTX public_key_hash_ctx;
     uint8_t public_key_hash[32];
     bal_entry *address = NULL;
+
+    _counter = malloc(sizeof(atomic_long));
+    atomic_init(_counter, 0);
+
+    pthread_t thread_counter;
+    if (pthread_create(&thread_counter, NULL, (void *)routine_print_counter, NULL) != 0)
+    {
+        perror("pthread_create");
+        return -1;
+    }
 
     for (;;)
     {
@@ -83,7 +110,9 @@ int main(int argc, char *argv[])
             break;
         }
 
-        if (signal_caught)
+        atomic_fetch_add(_counter, 1);
+
+        if (_signal_caught)
         {
             break;
         }
