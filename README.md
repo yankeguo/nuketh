@@ -1,10 +1,16 @@
 # nuketh
 
-An Ethereum collision toolkit
+A simple Ethereum collision tool
 
 ## Usage
 
 ### 1. Collect Target Ethereum Addresses
+
+> [!WARNING]
+>
+> This step will cost you $50+ on Google BigQuery, please make sure you have enough budget.
+>
+> Or you can just download [Pre-collected CSV Files](https://www.patreon.com/yankeguo/shop/csv-all-eth-addresses-with-balances-2024-241529?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=productshare_fan&utm_content=join_link)
 
 #### 1.1 Collect Ethereum Addresses and Balance
 
