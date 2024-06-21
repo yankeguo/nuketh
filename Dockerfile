@@ -11,7 +11,8 @@ RUN cmake . && make
 FROM alpine:3.20
 
 COPY --from=stage-build /src/nuketh /nuketh
+COPY --from=stage-build /src/nuketh-csv2bal /nuketh-csv2bal
 
 WORKDIR /data
 
-CMD [ "/nuketh" ]
+CMD [ "/nuketh", "nuketh.bal", "result.txt" ]
