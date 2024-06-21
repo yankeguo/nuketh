@@ -123,6 +123,31 @@ void bal_table_close(bal_table *t)
     close(t->fd);
 }
 
+int bal_table_check(const bal_table *t)
+{
+    if (t->buf == NULL)
+    {
+        fprintf(stderr, "Table not open\n");
+        return -1;
+    }
+
+    if (t->size == 0)
+    {
+        return 0;
+    }
+
+    for (off_t i = 1; i < t->size; i++)
+    {
+        if (bal_entry_cmp(&t->buf[i - 1], &t->buf[i]) > 0)
+        {
+            fprintf(stderr, "Table not sorted\n");
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 off_t bal_table_search(const bal_table *t, const bal_entry *entry)
 {
     if (t->buf == NULL)

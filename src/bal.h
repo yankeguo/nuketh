@@ -32,6 +32,8 @@ void bal_table_sort(bal_table *t);
 
 void bal_table_close(bal_table *t);
 
+int bal_table_check(const bal_table *t);
+
 off_t bal_table_search(const bal_table *t, const bal_entry *entry);
 
 #endif

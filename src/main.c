@@ -65,6 +65,13 @@ int main(int argc, char *argv[])
 
     printf("Table opened\n");
 
+    if (bal_table_check(&t) != 0)
+    {
+        return -1;
+    }
+
+    printf("Table checked\n");
+
     uECC_Curve curve = uECC_secp256k1();
     uint8_t private_key[PRIVATE_KEY_SIZE];
     uint8_t public_key[PUBLIC_KEY_SIZE];
